@@ -517,6 +517,8 @@ body.delete-mode {
 }
 
 .input-wrapper {
+    box-sizing: border-box;
+    max-width: 100%;
     flex: 1;
 }
 
@@ -527,8 +529,8 @@ body.delete-mode {
 }
 
 .form-group input[type="color"] {
-    width: 100%;
-    height: 40px;
+    width: 80%;
+    height: 50px;
     border: none;
     cursor: pointer;
 }
