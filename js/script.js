@@ -843,7 +843,7 @@ function setupEventListeners() {
     if (templateCopySettingsBtn) {
         templateCopySettingsBtn.addEventListener('click', () => {
             const currentMonth = currentDate.getMonth() + 1;
-            const headerTemplate = `お疲れ様です。\n${currentMonth}月のシフト提出します。`;
+            const headerTemplate = `お疲れ様です。\n${currentMonth}月のシフトです！！`;
             const footerTemplate = `ご確認よろしくお願いいたします。`;
 
             if (copyHeaderInput.value || copyFooterInput.value) {
@@ -1170,3 +1170,4 @@ function copyScheduleToClipboard() {
         alert('コピーに失敗しました。手動でコピーしてください。');
     });
 }
+
