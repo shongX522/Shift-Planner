@@ -497,7 +497,6 @@ body.delete-mode {
 
 @media screen and (max-width: 480px) {
     .time-inputs {
-        width:80vh;
         flex-direction: column;
         gap: 10px;
     }
@@ -517,7 +516,6 @@ body.delete-mode {
 }
 
 .input-wrapper {
-    max-width:80%;
     flex: 1;
 }
 
