@@ -517,6 +517,7 @@ body.delete-mode {
 }
 
 .input-wrapper {
+    width:80%;
     flex: 1;
 }
 
