@@ -1138,7 +1138,11 @@ function copyScheduleToClipboard() {
             calendarData[dateString].forEach(labelId => {
                 const label = labels.find(l => l.id === labelId);
                 if (label) {
-                    textContent += `${mmdd} (${dayOfWeek}) ${label.name}\n`;
+                    let timeText = label.name;
+                    if (label.startTime && label.endTime) {
+                        timeText = `${label.startTime} - ${label.endTime}`;
+                    }
+                    textContent += `${mmdd} (${dayOfWeek}) ${timeText}\n`;
                 }
             });
         }
@@ -1170,4 +1174,5 @@ function copyScheduleToClipboard() {
         alert('コピーに失敗しました。手動でコピーしてください。');
     });
 }
+
 
