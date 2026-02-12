@@ -529,7 +529,7 @@ body.delete-mode {
 }
 
 .form-group input[type="color"] {
-    width: 80%;
+    width: 50px;
     height: 50px;
     border: none;
     cursor: pointer;
