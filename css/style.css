@@ -1,4 +1,6 @@
-/* CSS Reset and Base */
+/* =========================================
+   1. REGULAR & BASIC SETUP
+   ========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -15,6 +17,9 @@ body {
     overflow-y: auto;
 }
 
+/* =========================================
+   2. APP CONTAINER & LAYOUT
+   ========================================= */
 .app-container {
     display: flex;
     width: 95%;
@@ -33,10 +38,12 @@ body {
     justify-content: center;
     text-align: center;
     margin-bottom: 20px;
-    padding: 10px
+    padding: 10px;
 }
 
-/* Sidebar Styling */
+/* =========================================
+   3. SIDEBAR STYLES
+   ========================================= */
 .sidebar {
     width: 320px;
     background-color: #f9fafb;
@@ -46,16 +53,6 @@ body {
     flex-direction: column;
     height: 100%;
     /* Ensure it takes full height */
-}
-
-/* ... existing styles ... */
-.labels-list {
-    flex-grow: 1;
-    /* Take up available space */
-    overflow-y: auto;
-    padding: 10px 8px 4px 4px;
-    min-height: 100px;
-    /* Minimum height for drag area */
 }
 
 .sidebar-header {
@@ -77,6 +74,79 @@ body {
     align-items: center;
 }
 
+.hourly-rate-container {
+    margin-bottom: 15px;
+}
+
+.weekly-limit-container {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.labels-list {
+    flex-grow: 1;
+    /* Take up available space */
+    overflow-y: auto;
+    padding: 10px 8px 4px 4px;
+    /* Extra space for scrollbar */
+    min-height: 100px;
+    /* Minimum height for drag area */
+}
+
+/* Time Label Items */
+.time-label {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    cursor: grab;
+    /* Default drag cursor */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, outline 0.2s;
+    user-select: none;
+}
+
+.time-label:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.time-label:active {
+    cursor: grabbing;
+}
+
+.time-label.selected {
+    border-color: #000000;
+    box-shadow: 0 0 0 2px #000000, 0 2px 2px rgba(0, 0, 0, 0.1);
+    background-color: #eff6ff;
+    outline: none;
+}
+
+/* Trash Zone */
+.trash-zone {
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px dashed #9ca3af;
+    border-radius: 8px;
+    text-align: center;
+    color: #6b7280;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.trash-zone.drag-over {
+    background-color: #fee2e2;
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+/* =========================================
+   4. BUTTON STYLES
+   ========================================= */
 .btn-primary {
     background-color: #3b82f6;
     color: white;
@@ -90,6 +160,19 @@ body {
 
 .btn-primary:hover {
     background-color: #2563eb;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    border: 1px solid #d1d5db;
+    color: #374151;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background-color: #f3f4f6;
 }
 
 .btn-icon {
@@ -121,73 +204,9 @@ body {
     color: #ef4444;
 }
 
-.labels-list {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding: 10px 8px 4px 4px;
-    /* Extra space for scrollbar */
-}
-
-.time-label {
-    background-color: white;
-    border: 1px solid #e5e7eb;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    cursor: grab;
-    /* Default drag cursor */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, outline 0.2s;
-    user-select: none;
-}
-
-.time-label:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.time-label:active {
-    cursor: grabbing;
-}
-
-/* Selected Label Style */
-.time-label.selected {
-    border-color: #000000;
-    box-shadow: 0 0 0 2px #000000, 0 2px 2px rgba(0, 0, 0, 0.1);
-    background-color: #eff6ff;
-    outline: none;
-}
-
-.trash-zone {
-    margin-top: 20px;
-    padding: 20px;
-    border: 2px dashed #9ca3af;
-    border-radius: 8px;
-    text-align: center;
-    color: #6b7280;
-    transition: background-color 0.2s, border-color 0.2s;
-}
-
-.hourly-rate-container {
-    margin-bottom: 15px;
-}
-
-.weekly-limit-container {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.trash-zone.drag-over {
-    background-color: #fee2e2;
-    border-color: #ef4444;
-    color: #ef4444;
-}
-
-/* Calendar Styling */
+/* =========================================
+   5. CALENDAR STYLES
+   ========================================= */
 .calendar-container {
     flex-grow: 1;
     padding: 20px;
@@ -222,6 +241,7 @@ body {
     background-color: #f3f4f6;
 }
 
+/* Calendar Grid */
 .calendar-grid-header {
     display: grid;
     grid-template-columns: repeat(7, 1fr) 60px;
@@ -230,10 +250,6 @@ body {
     font-weight: 600;
     color: #4b5563;
     margin-bottom: 10px;
-}
-
-.short-day {
-    display: none;
 }
 
 .calendar-grid {
@@ -245,12 +261,16 @@ body {
     gap: 1px;
     background-color: #e5e7eb;
     /* Border color */
-    /* Border color */
     overflow-y: auto;
     /* Scroll grid if needed */
     border: 1px solid #e5e7eb;
 }
 
+.short-day {
+    display: none;
+}
+
+/* Calendar Day Cell */
 .calendar-day {
     background-color: white;
     padding: 5px;
@@ -262,20 +282,13 @@ body {
     cursor: default;
 }
 
-body.apply-mode .calendar-day {
-    cursor: cell;
-    /* Show cell cursor when in apply mode */
-}
-
-/* When dragging over, override cursor */
-body.apply-mode .calendar-day:hover {
-    background-color: #f0fdf4;
-    /* Light green hover effect for adding */
-}
-
 .calendar-day.other-month {
     background-color: #f9fafb;
     color: #9ca3af;
+}
+
+.calendar-day.drag-over {
+    background-color: #eff6ff;
 }
 
 .day-number {
@@ -328,13 +341,10 @@ body.apply-mode .calendar-day:hover {
     cursor: grab;
     white-space: nowrap;
     overflow: hidden;
-    color: white;
-    cursor: grab;
-    white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
 }
 
+/* Weekly Totals */
 .calendar-week-total {
     background-color: #f3f4f6;
     display: flex;
@@ -351,6 +361,7 @@ body.apply-mode .calendar-day:hover {
     font-weight: 700;
 }
 
+/* Footer & Stats */
 .calendar-footer {
     padding: 15px 20px;
     background-color: #f9fafb;
@@ -379,7 +390,27 @@ body.apply-mode .calendar-day:hover {
     /* Green color for money */
 }
 
-/* Delete Mode Styles */
+/* =========================================
+   6. INTERACTIVE MODES (APPLY / DELETE)
+   ========================================= */
+
+/* Apply Mode */
+body.apply-mode .calendar-day {
+    cursor: cell;
+    /* Show cell cursor when in apply mode */
+}
+
+body.apply-mode .calendar-day:hover {
+    background-color: #f0fdf4;
+    /* Light green hover effect for adding */
+}
+
+/* Delete Mode */
+body.delete-mode {
+    cursor: default;
+    /* Or a custom trash cursor image */
+}
+
 body.delete-mode .calendar-label {
     cursor: pointer;
     position: relative;
@@ -400,23 +431,14 @@ body.delete-mode .calendar-label::after {
     line-height: 1;
 }
 
-/* Prevent dragging in delete mode */
 body.delete-mode .calendar-label[draggable="true"] {
     pointer-events: auto;
     /* Ensure events still fire for click */
 }
 
-/* Custom cursor for delete mode */
-body.delete-mode {
-    cursor: default;
-    /* Or a custom trash cursor image */
-}
-
-.calendar-day.drag-over {
-    background-color: #eff6ff;
-}
-
-/* Modal Styling */
+/* =========================================
+   7. MODALS & FORMS
+   ========================================= */
 .modal {
     position: fixed;
     top: 0;
@@ -448,6 +470,14 @@ body.delete-mode {
     color: #111827;
 }
 
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Form Groups */
 .form-group {
     margin-bottom: 15px;
 }
@@ -474,10 +504,29 @@ body.delete-mode {
     resize: vertical;
 }
 
+.form-group input[readonly] {
+    background-color: #f3f4f6;
+    color: #6b7280;
+    cursor: not-allowed;
+}
+
+.form-group input[type="color"] {
+    width: 100%;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
 .time-inputs {
     display: flex;
     flex-wrap: wrap;
+    /* Allow wrapping on small screens */
     gap: 15px;
+}
+
+.input-wrapper {
+    flex: 1;
+    min-width: 0;
 }
 
 .checkbox-group {
@@ -496,15 +545,7 @@ body.delete-mode {
     font-weight: normal;
 }
 
-@media screen and (max-width: 1366px) {
-    .time-inputs {
-        display:grid;
-        width:100%;
-        flex-direction: column;
-        gap: 10px;
-    }
-}
-
+/* Ghost Label (Drag Preview) */
 .ghost-label {
     position: fixed;
     pointer-events: none;
@@ -518,50 +559,24 @@ body.delete-mode {
     white-space: nowrap;
 }
 
-.input-wrapper {
-    flex: 1;
-    min-width: 0;
-}
+/* =========================================
+   8. MEDIA QUERIES
+   ========================================= */
 
-.form-group input[readonly] {
-    background-color: #f3f4f6;
-    color: #6b7280;
-    cursor: not-allowed;
-}
-
-.form-group input[type="color"] {
-    width: 100%;
-    height: 40px;
-    border: none;
-    cursor: pointer;
-}
-
-.modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.btn-secondary {
-    background-color: #fff;
-    border: 1px solid #d1d5db;
-    color: #374151;
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.btn-secondary:hover {
-    background-color: #f3f4f6;
-}
-
-/* Responsive Media Queries */
+/* Mobile Only Utility */
 .mobile-only {
     display: none;
 }
 
-@media screen and (max-width: 1024px) {
+/* Laptop / Small Desktop */
+@media screen and (max-width: 1366px) {
+    .time-inputs{
+        width: 100%;
+        display: grid;
+        flex-direction: column;
+        gap: 10px;
+    }
+
     .app-container {
         width: 100%;
         margin: 0;
@@ -569,6 +584,7 @@ body.delete-mode {
     }
 }
 
+/* Tablet / Mobile Layout */
 @media screen and (max-width: 768px) {
     .mobile-only {
         display: flex;
@@ -716,6 +732,7 @@ body.delete-mode {
     }
 }
 
+/* Small Mobile Utility */
 @media screen and (max-width: 480px) {
     .app-title {
         font-size: 1.2rem;
@@ -805,5 +822,10 @@ body.delete-mode {
     /* Ensure total column text fits */
     .calendar-week-total {
         font-size: 0.75rem;
+    }
+
+    .time-inputs {
+        flex-direction: column;
+        gap: 10px;
     }
 }
