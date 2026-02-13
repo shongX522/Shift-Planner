@@ -575,12 +575,12 @@ body.delete-mode .calendar-label[draggable="true"] {
         border-radius: 0;
     }
 
-    /*.time-inputs {
+    .time-inputs {
         display: grid;
         grid-template-columns: 1fr;
         gap: 15px;
         max-width: 100%;
-    }*/
+    }
 }
 
 /* Tablet / Mobile Layout */
