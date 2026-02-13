@@ -583,7 +583,7 @@ body.delete-mode .calendar-label[draggable="true"] {
     }
     .time-inputs .startTimeInput,
     .time-inputs .endTimeInput {
-        width: 100%;
+        width: 1fr;
     }
 }
 
@@ -827,5 +827,6 @@ body.delete-mode .calendar-label[draggable="true"] {
     .calendar-week-total {
         font-size: 0.75rem;
     }
+
 
 }
