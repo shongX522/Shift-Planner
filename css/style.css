@@ -575,6 +575,9 @@ body.delete-mode .calendar-label[draggable="true"] {
         margin: 0;
         border-radius: 0;
     }
+   .input-time{
+      overflow: hidden;
+   }
 }
 
 /* Tablet / Mobile Layout */
@@ -823,5 +826,6 @@ body.delete-mode .calendar-label[draggable="true"] {
     }
 
 }
+
 
 
