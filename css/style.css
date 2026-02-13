@@ -520,6 +520,7 @@ body.delete-mode .calendar-label[draggable="true"] {
 .time-inputs {
     display: flex;
     flex-wrap: wrap;
+    /* Allow wrapping on small screens */
     gap: 15px;
 }
 
@@ -574,14 +575,21 @@ body.delete-mode .calendar-label[draggable="true"] {
         margin: 0;
         border-radius: 0;
     }
-   
-    input[type="time"]{
-        width: 5vh;
+
+    .time-inputs {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .time-inputs .startTimeInput,
+    .time-inputs .endTimeInput {
+        width: 100%;
     }
 }
 
 /* Tablet / Mobile Layout */
 @media screen and (max-width: 768px) {
+
     .mobile-only {
         display: flex;
     }
@@ -820,18 +828,4 @@ body.delete-mode .calendar-label[draggable="true"] {
         font-size: 0.75rem;
     }
 
-    .time-inputs {
-        flex-direction: column;
-        gap: 10px;
-    }
-
 }
-
-
-
-
-
-
-
-
-
