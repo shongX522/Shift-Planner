@@ -571,6 +571,9 @@ body.delete-mode .calendar-label[draggable="true"] {
 /* Laptop / Small Desktop */
 @media screen and (max-width: 1366px) {
     .time-inputs{
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
         width:auto;
         display: grid;
         flex-direction: column;
@@ -833,3 +836,4 @@ body.delete-mode .calendar-label[draggable="true"] {
     }
 
 }
+
