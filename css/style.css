@@ -577,6 +577,8 @@ body.delete-mode .calendar-label[draggable="true"] {
     }
    .input-time{
       overflow: hidden;
+      display: grid;
+      gap: 10px;
    }
 }
 
@@ -826,6 +828,7 @@ body.delete-mode .calendar-label[draggable="true"] {
     }
 
 }
+
 
 
 
