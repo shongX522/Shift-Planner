@@ -499,7 +499,7 @@ body.delete-mode .calendar-label[draggable="true"] {
     font-size: 1rem;
 }
 .form-group input[type="time"]{
-    width:100%;
+    width:80%;
     padding:8px auto;
     border: 1px solid #d1d5db;
     border-radius: 6px;
