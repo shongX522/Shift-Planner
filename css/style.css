@@ -574,7 +574,7 @@ body.delete-mode .calendar-label[draggable="true"] {
         margin: 0;
         border-radius: 0;
     }
-   .time-inputs{
+   .form-group input[type="time"]{
         width: 100%;
         display: grid;
         flex-direction: column;
@@ -828,6 +828,7 @@ body.delete-mode .calendar-label[draggable="true"] {
     }
 
 }
+
 
 
 
