@@ -511,7 +511,7 @@ body.delete-mode .calendar-label[draggable="true"] {
 }
 
 .form-group input[type="color"] {
-    width: 20%;
+    width: 15%;
     height: 40px;
     border: none;
     cursor: pointer;
@@ -582,6 +582,7 @@ body.delete-mode .calendar-label[draggable="true"] {
         display: grid;
         grid-template-columns: 1fr;
         gap: 15px;
+        max-width: 100%;
     }
 }
 
