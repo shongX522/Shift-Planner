@@ -516,12 +516,12 @@ body.delete-mode .calendar-label[draggable="true"] {
     cursor: pointer;
 }
 
-/*.time-inputs {
+.time-inputs {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
     width: 100%;
-}*/
+}
 
 .input-wrapper {
     flex: 1;
