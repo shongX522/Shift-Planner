@@ -571,12 +571,15 @@ body.delete-mode .calendar-label[draggable="true"] {
 /* Laptop / Small Desktop */
 @media screen and (max-width: 1366px) {
     .time-inputs{
-        width: 100%;
+        width:auto;
         display: grid;
         flex-direction: column;
         gap: 10px;
     }
-
+    .laber-color{
+       width: auto;
+       hight: auto;
+    }
     .app-container {
         width: 100%;
         margin: 0;
@@ -828,4 +831,5 @@ body.delete-mode .calendar-label[draggable="true"] {
         flex-direction: column;
         gap: 10px;
     }
+
 }
