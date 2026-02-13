@@ -475,10 +475,8 @@ body.delete-mode {
 }
 
 .time-inputs {
-    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    /* Allow wrapping on small screens */
     gap: 15px;
 }
 
@@ -500,6 +498,8 @@ body.delete-mode {
 
 @media screen and (max-width: 1366px) {
     .time-inputs {
+        display:grid;
+        width:100%;
         flex-direction: column;
         gap: 10px;
     }
