@@ -511,7 +511,7 @@ body.delete-mode .calendar-label[draggable="true"] {
 }
 
 .form-group input[type="color"] {
-    width: 100%;
+    width: 20%;
     height: 40px;
     border: none;
     cursor: pointer;
@@ -520,8 +520,10 @@ body.delete-mode .calendar-label[draggable="true"] {
 .time-inputs {
     display: flex;
     flex-wrap: wrap;
-    /* Allow wrapping on small screens */
     gap: 15px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .input-wrapper {
@@ -580,10 +582,6 @@ body.delete-mode .calendar-label[draggable="true"] {
         display: grid;
         grid-template-columns: 1fr;
         gap: 15px;
-    }
-    .time-inputs .startTimeInput,
-    .time-inputs .endTimeInput {
-        width: 1fr;
     }
 }
 
@@ -827,6 +825,5 @@ body.delete-mode .calendar-label[draggable="true"] {
     .calendar-week-total {
         font-size: 0.75rem;
     }
-
 
 }
