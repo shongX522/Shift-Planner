@@ -698,6 +698,7 @@ body.delete-mode .calendar-label[draggable="true"] {
         grid-template-columns: 1fr;
         gap: 15px;
         max-width: 100%;
+        padding-right: auto;
     }
 }
 
