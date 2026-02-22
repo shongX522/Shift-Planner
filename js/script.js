@@ -2,28 +2,28 @@
    1. STATE MANAGEMENT & CONSTANTS
    ========================================= */
 let currentDate = new Date();
-let labels = JSON.parse(sessionStorage.getItem('workdayLabels')) || [
+let labels = JSON.parse(localStorage.getItem('workdayLabels')) || [
     { id: '1', name: '16:00 - 22:00', color: '#10b981', duration: 6 },
     { id: '2', name: '17:00 - 22:00', color: '#f59e0b', duration: 5 },
 ];
-let calendarData = JSON.parse(sessionStorage.getItem('workdayData')) || {};
+let calendarData = JSON.parse(localStorage.getItem('workdayData')) || {};
 
 // Settings
-const storedRate = parseFloat(sessionStorage.getItem('workdayHourlyRate'));
+const storedRate = parseFloat(localStorage.getItem('workdayHourlyRate'));
 let hourlyRate = isNaN(storedRate) ? 0 : storedRate;
 
-const storedTransport = parseFloat(sessionStorage.getItem('workdayTransportFee'));
+const storedTransport = parseFloat(localStorage.getItem('workdayTransportFee'));
 let transportFee = isNaN(storedTransport) ? 0 : storedTransport;
 
-const storedLimit = parseFloat(sessionStorage.getItem('workdayWeeklyLimit'));
+const storedLimit = parseFloat(localStorage.getItem('workdayWeeklyLimit'));
 let weeklyLimit = isNaN(storedLimit) ? 0 : storedLimit;
-const storedLimitEnabled = sessionStorage.getItem('workdayWeeklyLimitEnabled');
+const storedLimitEnabled = localStorage.getItem('workdayWeeklyLimitEnabled');
 let weeklyLimitEnabled = storedLimitEnabled === null ? false : (storedLimitEnabled === 'true');
 
 let isDeleteMode = false;
 let selectedLabelId = null;
-let copyHeader = sessionStorage.getItem('workdayCopyHeader') || '';
-let copyFooter = sessionStorage.getItem('workdayCopyFooter') || '';
+let copyHeader = localStorage.getItem('workdayCopyHeader') || '';
+let copyFooter = localStorage.getItem('workdayCopyFooter') || '';
 
 // Mobile Dragging State
 let touchDragElement = null;
@@ -1161,3 +1161,4 @@ function closeSidebar() {
     sidebar.classList.remove('active');
     document.body.classList.remove('sidebar-open');
 }
+
