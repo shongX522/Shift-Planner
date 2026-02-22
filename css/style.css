@@ -606,7 +606,6 @@ body.delete-mode .calendar-label[draggable="true"] {
 
 .form-group input[type="text"],
 .form-group input[type="number"],
-.form-group input[type="time"],
 .form-group textarea {
     width: 100%;
     padding: 8px 12px;
@@ -699,7 +698,6 @@ body.delete-mode .calendar-label[draggable="true"] {
         display: grid;
         grid-template-columns: 1fr;
         gap: 15px;
-        max-width: 100%;
     }
 }
 
