@@ -695,6 +695,7 @@ body.delete-mode .calendar-label[draggable="true"] {
 
     .time-inputs {
         width: 100%;
+        max-width: 100%;
         padding: 8px auto;
         display: grid;
         grid-template-columns: 1fr;
