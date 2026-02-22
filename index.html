@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>勤務時間表</title>
+    <title data-i18n="title">勤務時間表</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
@@ -14,34 +14,39 @@
         <!-- Sidebar for Time Labels -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <h2>シフトラベル</h2>
-                <button id="close-sidebar-btn" class="btn-icon mobile-only" title="閉じる">✕</button>
+                <h2 data-i18n="sidebarTitle">シフトラベル</h2>
+                <button id="close-sidebar-btn" class="btn-icon mobile-only" title="閉じる"
+                    data-i18n-title="closeSidebar">✕</button>
             </div>
 
             <div class="header-actions" style="margin-bottom: 15px; justify-content: space-between;">
-                <button id="toggle-delete-btn" class="btn-icon" title="削除モード">🗑️</button>
-                <button id="clear-all-btn" class="btn-icon" title="全解除">🧹</button>
-                <button id="add-label-btn" class="btn-primary">+ ラベル追加</button>
+                <button id="toggle-delete-btn" class="btn-icon" title="削除モード" data-i18n-title="deleteMode">🗑️</button>
+                <button id="clear-all-btn" class="btn-icon" title="全解除" data-i18n-title="clearAll">🧹</button>
+                <button id="add-label-btn" class="btn-primary" data-i18n="addLabel">+ ラベル追加</button>
             </div>
 
             <div id="labels-container" class="labels-list">
                 <!-- Draggable labels will be injected here -->
             </div>
 
-            <div class="trash-zone" id="trash-zone">
+            <div class="trash-zone" id="trash-zone" data-i18n="trashZone">
                 🗑️ ラベルのゴミ箱
             </div>
 
+            <button id="reset-labels-btn" class="btn-reset" data-i18n="resetLabelsBtn">
+                🔄 ラベルをリセット
+            </button>
+
             <div class="form-group" style="margin-top: 20px; border-top: 1px solid #e5e7eb; padding-top: 20px;">
                 <button id="open-settings-btn" class="btn-secondary"
-                    style="font-size: 1rem; width: 100%; display: flex; align-items: center; justify-content: center; gap: 5px;">
-                    <span>⚙️</span> 設定
+                    style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 5px;">
+                    <span>⚙️</span> <span data-i18n="settings">設定</span>
                 </button>
             </div>
 
             <div class="form-group">
                 <button id="copy-settings-btn" class="btn-primary" style="width: 100%; display: block;">📝
-                    コピー設定</button>
+                    <span data-i18n="copySettings">コピー設定</span></button>
             </div>
         </aside>
 
@@ -50,39 +55,56 @@
             <div class="calendar-header">
                 <button id="menu-toggle-btn" class="btn-icon mobile-only" style="margin-right: auto;">☰</button>
                 <button id="prev-month">&lt;</button>
-                <h1 class="app-title">勤務時間表 $$</h1>
+                <h1 class="app-title" data-i18n="appTitle">勤務時間表 $$</h1>
+
                 <h2 id="current-month-year">2023年 10月</h2>
                 <button id="next-month">&gt;</button>
+
+                <div class="lang-switcher">
+                    <button class="lang-btn" data-lang="ja">JP</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="ko">KR</button>
+                </div>
             </div>
 
             <!-- Mobile Active Label Display -->
             <div id="active-label-display" class="active-label-display mobile-only">
-                <span class="label-status-text">現在選択中:</span>
-                <span id="active-label-badge" class="active-label-badge">な し</span>
-                <button id="clear-active-label-btn" class="btn-icon-small" title="選択解除"
+                <span class="label-status-text" data-i18n="activeLabelText">現在選択中:</span>
+                <span id="active-label-badge" class="active-label-badge" data-i18n="none">な し</span>
+                <button id="clear-active-label-btn" class="btn-icon-small" title="選択解除" data-i18n-title="clearSelection"
                     style="display: none;">✕</button>
             </div>
             <div class="calendar-grid-header">
-                <div><span class="full-day">日曜日</span><span class="short-day">日</span></div>
-                <div><span class="full-day">月曜日</span><span class="short-day">月</span></div>
-                <div><span class="full-day">火曜日</span><span class="short-day">火</span></div>
-                <div><span class="full-day">水曜日</span><span class="short-day">水</span></div>
-                <div><span class="full-day">木曜日</span><span class="short-day">木</span></div>
-                <div><span class="full-day">金曜日</span><span class="short-day">金</span></div>
-                <div><span class="full-day">土曜日</span><span class="short-day">土</span></div>
-                <div>合計</div>
+                <div><span class="full-day" data-i18n="sun">日曜日</span><span class="short-day"
+                        data-i18n="sunShort">日</span></div>
+                <div><span class="full-day" data-i18n="mon">月曜日</span><span class="short-day"
+                        data-i18n="monShort">月</span></div>
+                <div><span class="full-day" data-i18n="tue">火曜日</span><span class="short-day"
+                        data-i18n="tueShort">火</span></div>
+                <div><span class="full-day" data-i18n="wed">水曜日</span><span class="short-day"
+                        data-i18n="wedShort">水</span></div>
+                <div><span class="full-day" data-i18n="thu">木曜日</span><span class="short-day"
+                        data-i18n="thuShort">木</span></div>
+                <div><span class="full-day" data-i18n="fri">金曜日</span><span class="short-day"
+                        data-i18n="friShort">金</span></div>
+                <div><span class="full-day" data-i18n="sat">土曜日</span><span class="short-day"
+                        data-i18n="satShort">土</span></div>
+                <div data-i18n="total">合計</div>
             </div>
             <div id="calendar-grid" class="calendar-grid">
                 <!-- Calendar days will be injected here -->
             </div>
             <div class="calendar-footer">
                 <div class="footer-actions">
-                    <button id="export-btn" class="btn-secondary">📊 Excelに出力</button>
-                    <button id="copy-btn" class="btn-secondary">📋 コピー</button>
+                    <button id="export-btn" class="btn-secondary" data-i18n="exportExcel">📊 Excelに出力</button>
+                    <button id="copy-btn" class="btn-secondary" data-i18n="copyBtn">📋 コピー</button>
                 </div>
                 <div class="footer-stats">
-                    <h3>月間合計: <span id="monthly-total">0</span> 時間</h3>
-                    <h3 class="salary-display">推定給与: <span id="estimated-salary">0</span> 円</h3>
+                    <h3><span data-i18n="monthlyTotal">月間合計</span>: <span id="monthly-total">0</span> <span
+                            class="hours-unit" data-i18n="hoursUnit">時間</span></h3>
+                    <h3 class="salary-display"><span data-i18n="estimatedSalary">推定給与</span>: <span
+                            id="estimated-salary">0</span> <span class="currency-unit" data-i18n="currencyUnit">円</span>
+                    </h3>
                 </div>
             </div>
         </main>
@@ -91,32 +113,34 @@
     <!-- Modal for Creating New Label -->
     <div id="label-modal" class="modal hidden">
         <div class="modal-content">
-            <h3>新規ラベル作成</h3>
+            <h3 id="label-modal-title" data-i18n="newLabelTitle">新規ラベル作成</h3>
             <div class="form-group time-inputs">
                 <div class="input-wrapper">
-                    <label for="start-time">開始時間</label>
-                    <input type="time" id="start-time">
+                    <label for="start-time" data-i18n="startTime">開始時間</label>
+                    <input type="time" id="start-time" required>
                 </div>
                 <div class="input-wrapper">
-                    <label for="end-time">終了時間</label>
-                    <input type="time" id="end-time">
+                    <label for="end-time" data-i18n="endTime">終了時間</label>
+                    <input type="time" id="end-time" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="label-text">ラベル名</label>
-                <input type="text" id="label-text" placeholder="名前を入力 (例: 早番)">
+                <label for="label-text" data-i18n="labelName">ラベル名</label>
+                <input type="text" id="label-text" placeholder="名前を入力 (例: 早番)"
+                    data-i18n-placeholder="labelNamePlaceholder">
             </div>
             <div class="form-group">
-                <label for="label-duration">時間数</label>
-                <input type="number" id="label-duration" placeholder="自動計算" step="0.5" min="0" readonly>
+                <label for="label-duration" data-i18n="duration">時間数</label>
+                <input type="number" id="label-duration" placeholder="自動計算" data-i18n-placeholder="autoCalculate"
+                    step="0.5" min="0" readonly>
             </div>
             <div class="form-group">
-                <label for="label-color">色選択</label>
+                <label for="label-color" data-i18n="pickColor">色選択</label>
                 <input type="color" id="label-color" value="#3b82f6">
             </div>
             <div class="modal-actions">
-                <button id="cancel-btn" class="btn-secondary">キャンセル</button>
-                <button id="save-label-btn" class="btn-primary">保存</button>
+                <button id="cancel-btn" class="btn-secondary" data-i18n="cancel">キャンセル</button>
+                <button id="save-label-btn" class="btn-primary" data-i18n="save">保存</button>
             </div>
         </div>
     </div>
@@ -124,20 +148,22 @@
     <!-- Modal for Copy Settings -->
     <div id="copy-settings-modal" class="modal hidden">
         <div class="modal-content">
-            <h3>コピー設定</h3>
+            <h3 data-i18n="copySettingsTitle">コピー設定</h3>
             <div class="form-group">
-                <label for="copy-header-text">冒頭のメッセージ</label>
-                <textarea id="copy-header-text" rows="3" placeholder="お疲れ様です..."></textarea>
+                <label for="copy-header-text" data-i18n="headerMessage">冒頭のメッセージ</label>
+                <textarea id="copy-header-text" rows="3" placeholder="お疲れ様です..."
+                    data-i18n-placeholder="headerPlaceholder"></textarea>
             </div>
             <div class="form-group">
-                <label for="copy-footer-text">結びのメッセージ</label>
-                <textarea id="copy-footer-text" rows="3" placeholder="よろしくお願いします..."></textarea>
+                <label for="copy-footer-text" data-i18n="footerMessage">結びのメッセージ</label>
+                <textarea id="copy-footer-text" rows="3" placeholder="よろしくお願いします..."
+                    data-i18n-placeholder="footerPlaceholder"></textarea>
             </div>
             <div class="modal-actions">
-                <button id="template-copy-settings-btn" class="btn-secondary" style="margin-right: auto;">🪄
-                    テンプレート</button>
-                <button id="close-copy-settings-btn" class="btn-secondary">キャンセル</button>
-                <button id="save-copy-settings-btn" class="btn-primary">保存</button>
+                <button id="template-copy-settings-btn" class="btn-secondary" style="margin-right: auto;">
+                    <span data-i18n="template">🪄 テンプレート</span></button>
+                <button id="close-copy-settings-btn" class="btn-secondary" data-i18n="cancel">キャンセル</button>
+                <button id="save-copy-settings-btn" class="btn-primary" data-i18n="save">保存</button>
             </div>
         </div>
     </div>
@@ -145,34 +171,35 @@
     <!-- Modal for Settings -->
     <div id="settings-modal" class="modal hidden">
         <div class="modal-content">
-            <h3>設定</h3>
+            <h3 data-i18n="settings">設定</h3>
             <div class="form-group">
-                <label for="modal-hourly-rate">時給 (円)</label>
+                <label for="modal-hourly-rate" data-i18n="hourlyRate">時給 (円)</label>
                 <input type="number" id="modal-hourly-rate" placeholder="例: 1000" min="0">
             </div>
             <div class="form-group">
-                <label for="modal-transport-fee">交通費 (1日あたり)</label>
+                <label for="modal-transport-fee" data-i18n="transportFee">交通費 (1日あたり)</label>
                 <input type="number" id="modal-transport-fee" placeholder="例: 500" min="0">
             </div>
             <div class="form-group">
-                <label for="modal-weekly-limit">週労働時間上限 (時間)</label>
+                <label for="modal-weekly-limit">
+                    <span data-i18n="weeklyLimit">週労働時間上限 (時間)</span>
+                </label>
                 <div class="checkbox-group">
                     <input type="checkbox" id="modal-weekly-limit-enabled">
-                    <label for="modal-weekly-limit-enabled">週労働時間上限あります。</label>
+                    <label for="modal-weekly-limit-enabled" data-i18n="weeklyLimitEnabled">週労働時間上限あります。</label>
                 </div>
                 <input type="number" id="modal-weekly-limit" placeholder="デフォルト: 40" min="0">
             </div>
             <div class="modal-actions">
-                <button id="close-settings-btn" class="btn-secondary">キャンセル</button>
-                <button id="save-settings-btn" class="btn-primary">保存</button>
+                <button id="close-settings-btn" class="btn-secondary" data-i18n="cancel">キャンセル</button>
+                <button id="save-settings-btn" class="btn-primary" data-i18n="save">保存</button>
             </div>
         </div>
     </div>
 
+    <script src="js/translations.js"></script>
     <script src="js/holidays.js"></script>
     <script src="js/script.js"></script>
 </body>
 
-
 </html>
-

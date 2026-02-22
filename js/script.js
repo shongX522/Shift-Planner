@@ -1,11 +1,12 @@
 /* =========================================
    1. STATE MANAGEMENT & CONSTANTS
    ========================================= */
-let currentDate = new Date();
-let labels = JSON.parse(localStorage.getItem('workdayLabels')) || [
-    { id: '1', name: '16:00 - 22:00', color: '#10b981', duration: 6 },
-    { id: '2', name: '17:00 - 22:00', color: '#f59e0b', duration: 5 },
+const DEFAULT_LABELS = [
+    //{ id: '1', name: '16:00 - 22:00', color: '#10b981', duration: 6, startTime: '16:00', endTime: '22:00' }
 ];
+
+let currentDate = new Date();
+let labels = JSON.parse(localStorage.getItem('workdayLabels')) || [...DEFAULT_LABELS];
 let calendarData = JSON.parse(localStorage.getItem('workdayData')) || {};
 
 // Settings
@@ -24,6 +25,19 @@ let isDeleteMode = false;
 let selectedLabelId = null;
 let copyHeader = localStorage.getItem('workdayCopyHeader') || '';
 let copyFooter = localStorage.getItem('workdayCopyFooter') || '';
+let editingLabelId = null;
+
+// I18n State
+let currentLanguage = localStorage.getItem('workdayLanguage') || 'ja';
+if (!translations[currentLanguage]) currentLanguage = 'ja';
+
+function t(key, params = {}) {
+    let text = (translations[currentLanguage] && translations[currentLanguage][key]) || key;
+    for (const [k, v] of Object.entries(params)) {
+        text = text.replace(`{${k}}`, v);
+    }
+    return text;
+}
 
 // Mobile Dragging State
 let touchDragElement = null;
@@ -60,6 +74,7 @@ const labelDurationInput = document.getElementById('label-duration');
 const startTimeInput = document.getElementById('start-time');
 const endTimeInput = document.getElementById('end-time');
 const labelColorInput = document.getElementById('label-color');
+const labelModalTitle = document.getElementById('label-modal-title');
 
 // Sidebar & Settings
 const sidebar = document.getElementById('sidebar');
@@ -84,6 +99,8 @@ const modalHourlyRateInput = document.getElementById('modal-hourly-rate');
 const modalTransportFeeInput = document.getElementById('modal-transport-fee');
 const modalWeeklyLimitInput = document.getElementById('modal-weekly-limit');
 const modalWeeklyLimitEnabledCheckbox = document.getElementById('modal-weekly-limit-enabled');
+const resetLabelsBtn = document.getElementById('reset-labels-btn');
+const langBtns = document.querySelectorAll('.lang-btn');
 
 
 /* =========================================
@@ -104,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     updateMonthlyTotal(); // Initial calc
     updateActiveLabelDisplay();
+    updatePageLanguage();
 });
 
 
@@ -124,6 +142,11 @@ function setupEventListeners() {
 
     // --- Label Management ---
     addLabelBtn.addEventListener('click', () => {
+        editingLabelId = null;
+        if (labelModalTitle) {
+            labelModalTitle.textContent = t('newLabelTitle');
+            labelModalTitle.setAttribute('data-i18n', 'newLabelTitle');
+        }
         labelModal.classList.remove('hidden');
         labelTextInput.value = '';
         labelDurationInput.value = '';
@@ -177,11 +200,27 @@ function setupEventListeners() {
         clearAllBtn.addEventListener('click', handleClearAll);
     }
 
+    if (resetLabelsBtn) {
+        resetLabelsBtn.addEventListener('click', handleResetLabels);
+    }
+
 
     // --- Sidebar & Modals ---
     setupSidebarEvents();
     setupCopySettingsEvents();
     setupGeneralSettingsEvents();
+
+    langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            currentLanguage = btn.dataset.lang;
+            localStorage.setItem('workdayLanguage', currentLanguage);
+            document.documentElement.lang = currentLanguage;
+            updatePageLanguage();
+            renderCalendar(currentDate);
+            updateMonthlyTotal();
+            updateActiveLabelDisplay();
+        });
+    });
 }
 
 function setupSidebarEvents() {
@@ -220,17 +259,14 @@ function setupCopySettingsEvents() {
 
     if (templateCopySettingsBtn) {
         templateCopySettingsBtn.addEventListener('click', () => {
-            const currentMonth = currentDate.getMonth() + 1;
-            const headerTemplate = `お疲れ様です。\n${currentMonth}月のシフトのシフトです！`;
-            const footerTemplate = `お願いいたします。`;
-
             if ((copyHeaderInput.value || copyFooterInput.value) &&
-                !confirm('現在の入力内容を上書きしてもよろしいですか？')) {
+                !confirm(t('deleteConfirm'))) { // Using deleteConfirm for simple "Overwrite?" here as well, or define new
                 return;
             }
 
-            copyHeaderInput.value = headerTemplate;
-            copyFooterInput.value = footerTemplate;
+            const currentMonth = currentDate.getMonth() + 1;
+            copyHeaderInput.value = t('templateHeader', { month: currentMonth });
+            copyFooterInput.value = t('templateFooter');
         });
     }
 
@@ -285,7 +321,8 @@ function renderCalendar(date) {
     const year = date.getFullYear();
     const month = date.getMonth();
 
-    currentMonthYear.textContent = `${year}年 ${month + 1}月`;
+    const monthName = t('monthNames')[month];
+    currentMonthYear.textContent = t('dateYearMonth', { year, month: monthName });
 
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
@@ -413,7 +450,7 @@ function renderWeeklyTotal(year, month, refDay, lastDayOfWeek = 6, isPartialEndW
     weekTotalDiv.textContent = weeklyHours > 0 ? `${weeklyHours}h` : '-';
     if (weeklyLimitEnabled && weeklyHours > weeklyLimit) {
         weekTotalDiv.classList.add('over-limit');
-        weekTotalDiv.title = `週労働時間上限 ${weeklyLimit} 時間を超えています`;
+        weekTotalDiv.title = t('overLimit', { limit: weeklyLimit });
     }
     calendarGrid.appendChild(weekTotalDiv);
 }
@@ -439,12 +476,23 @@ function createDraggableLabel(label, isCalendarItem, dateString = null) {
     div.dataset.id = label.id;
 
     if (!isCalendarItem) {
+        // Edit Button (Pen emoji)
+        const editBtn = document.createElement('span');
+        editBtn.className = 'edit-label-btn';
+        editBtn.textContent = '✏️';
+        editBtn.title = t('editLabelTitle');
+        editBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openEditLabelModal(label.id);
+        });
+        div.appendChild(editBtn);
+
         if (label.id === selectedLabelId) {
             div.classList.add('selected');
         }
         div.addEventListener('click', () => {
             if (isDeleteMode) {
-                if (confirm('このラベルを削除してもよろしいですか？')) {
+                if (confirm(t('deleteConfirm'))) {
                     deleteSidebarLabel(label.id);
                 }
             } else {
@@ -536,7 +584,7 @@ function handleTrashDrop(e) {
     if (data.from === 'calendar') {
         removeLabelFromDate(data.date, data.id);
     } else if (data.from === 'sidebar') {
-        if (confirm('このラベルを削除してもよろしいですか？')) {
+        if (confirm(t('deleteConfirm'))) {
             deleteSidebarLabel(data.id);
         }
     }
@@ -624,7 +672,7 @@ function handleTouchEnd(e) {
         if (touchDragData.from === 'calendar') {
             removeLabelFromDate(touchDragData.date, touchDragData.id);
         } else if (touchDragData.from === 'sidebar') {
-            if (confirm('このラベルを削除してもよろしいですか？')) {
+            if (confirm(t('deleteConfirm'))) {
                 deleteSidebarLabel(touchDragData.id);
             }
         }
@@ -673,7 +721,7 @@ function addLabelToDate(date, labelId) {
                 }
             }
             if (hasOverlap) {
-                alert('時間が重複しています！このラベルは追加できません。');
+                alert(t('overlapError'));
                 return;
             }
         }
@@ -684,7 +732,7 @@ function addLabelToDate(date, labelId) {
     const newDuration = newLabel ? parseFloat(newLabel.duration || 0) : 0;
 
     if (weeklyLimitEnabled && currentWeeklyTotal + newDuration > weeklyLimit) {
-        alert(`週労働時間上限 (${weeklyLimit}時間) を超えています！\nこのシフトを追加すると、週合計が ${currentWeeklyTotal + newDuration}時間 になります。`);
+        alert(t('weeklyLimitError', { limit: weeklyLimit, total: currentWeeklyTotal + newDuration }));
         return;
     }
 
@@ -751,7 +799,7 @@ function updateActiveLabelDisplay() {
     if (!badge) return;
 
     if (isDeleteMode) {
-        badge.textContent = '🗑️ 削除モード';
+        badge.textContent = `🗑️ ${t('deleteMode')}`;
         badge.style.backgroundColor = '#ef4444';
         if (clearActiveLabelBtn) clearActiveLabelBtn.style.display = 'none';
     } else if (selectedLabelId) {
@@ -762,7 +810,7 @@ function updateActiveLabelDisplay() {
             if (clearActiveLabelBtn) clearActiveLabelBtn.style.display = 'inline-block';
         }
     } else {
-        badge.textContent = 'な し';
+        badge.textContent = t('none');
         badge.style.backgroundColor = '#9ca3af';
         if (clearActiveLabelBtn) clearActiveLabelBtn.style.display = 'none';
     }
@@ -801,6 +849,25 @@ function updateMonthlyTotal() {
     }
 }
 
+function openEditLabelModal(id) {
+    const label = labels.find(l => l.id === id);
+    if (!label) return;
+
+    editingLabelId = id;
+    if (labelModalTitle) {
+        labelModalTitle.textContent = t('editLabelTitle');
+        labelModalTitle.setAttribute('data-i18n', 'editLabelTitle');
+    }
+
+    labelTextInput.value = label.name;
+    labelDurationInput.value = label.duration || '';
+    if (startTimeInput) startTimeInput.value = label.startTime || '';
+    if (endTimeInput) endTimeInput.value = label.endTime || '';
+    if (labelColorInput) labelColorInput.value = label.color || '#3b82f6';
+
+    labelModal.classList.remove('hidden');
+}
+
 function handleSaveLabel() {
     const name = labelTextInput.value.trim();
     const duration = labelDurationInput.value;
@@ -809,23 +876,41 @@ function handleSaveLabel() {
     const endTime = endTimeInput.value;
 
     if (name) {
-        const newLabel = {
-            id: Date.now().toString(),
-            name,
-            duration: duration ? parseFloat(duration) : 0,
-            color,
-            startTime,
-            endTime
-        };
-        labels.push(newLabel);
+        if (editingLabelId) {
+            // Update existing
+            const labelIndex = labels.findIndex(l => l.id === editingLabelId);
+            if (labelIndex > -1) {
+                labels[labelIndex] = {
+                    ...labels[labelIndex],
+                    name,
+                    duration: duration ? parseFloat(duration) : 0,
+                    color,
+                    startTime,
+                    endTime
+                };
+            }
+        } else {
+            // Create new
+            const newLabel = {
+                id: Date.now().toString(),
+                name,
+                duration: duration ? parseFloat(duration) : 0,
+                color,
+                startTime,
+                endTime
+            };
+            labels.push(newLabel);
+        }
+        editingLabelId = null;
         saveData();
         renderLabels();
+        renderCalendar(currentDate); // Re-render calendar to update existing label colors/names
         labelModal.classList.add('hidden');
     }
 }
 
 function handleClearAll() {
-    if (confirm('スケジュールされたすべてのラベルを削除してもよろしいですか？')) {
+    if (confirm(t('clearAllConfirm'))) {
         calendarData = {};
         saveData();
         renderCalendar(currentDate);
@@ -833,15 +918,28 @@ function handleClearAll() {
     }
 }
 
+function handleResetLabels() {
+    if (confirm(t('resetLabelsConfirm'))) {
+        labels = [...DEFAULT_LABELS];
+        calendarData = {};
+        saveData();
+        renderLabels();
+        renderCalendar(currentDate);
+        updateMonthlyTotal();
+        selectLabel(null);
+        alert(t('saveSuccess'));
+    }
+}
+
 function handleSaveCopySettings() {
     copyHeader = copyHeaderInput.value;
     copyFooter = copyFooterInput.value;
-    sessionStorage.setItem('workdayCopyHeader', copyHeader);
-    sessionStorage.setItem('workdayCopyFooter', copyFooter);
+    localStorage.setItem('workdayCopyHeader', copyHeader);
+    localStorage.setItem('workdayCopyFooter', copyFooter);
 
     // Visual feedback
-    const originalText = saveCopySettingsBtn.textContent;
-    saveCopySettingsBtn.textContent = '保存しました！';
+    const originalText = saveCopySettingsBtn.innerHTML;
+    saveCopySettingsBtn.textContent = t('saveSuccess');
     saveCopySettingsBtn.style.backgroundColor = '#10b981';
     saveCopySettingsBtn.disabled = true;
 
@@ -861,10 +959,10 @@ function handleSaveGeneralSettings() {
     if (modalWeeklyLimitInput) weeklyLimit = parseFloat(modalWeeklyLimitInput.value) || 0;
     if (modalWeeklyLimitEnabledCheckbox) weeklyLimitEnabled = modalWeeklyLimitEnabledCheckbox.checked;
 
-    sessionStorage.setItem('workdayHourlyRate', hourlyRate);
-    sessionStorage.setItem('workdayTransportFee', transportFee);
-    sessionStorage.setItem('workdayWeeklyLimit', weeklyLimit);
-    sessionStorage.setItem('workdayWeeklyLimitEnabled', weeklyLimitEnabled);
+    localStorage.setItem('workdayHourlyRate', hourlyRate);
+    localStorage.setItem('workdayTransportFee', transportFee);
+    localStorage.setItem('workdayWeeklyLimit', weeklyLimit);
+    localStorage.setItem('workdayWeeklyLimitEnabled', weeklyLimitEnabled);
 
     settingsModal.classList.add('hidden');
     updateMonthlyTotal();
@@ -872,8 +970,8 @@ function handleSaveGeneralSettings() {
 }
 
 function saveData() {
-    sessionStorage.setItem('workdayLabels', JSON.stringify(labels));
-    sessionStorage.setItem('workdayData', JSON.stringify(calendarData));
+    localStorage.setItem('workdayLabels', JSON.stringify(labels));
+    localStorage.setItem('workdayData', JSON.stringify(calendarData));
 }
 
 
@@ -1006,8 +1104,8 @@ function exportToCSV() {
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
     let csvContent = '\uFEFF';
-    csvContent += '日付,曜日,シフト,時間数,推定給与\n';
-    const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+    csvContent += t('csvHeader') + '\n';
+    const dayNames = [t('sunShort'), t('monShort'), t('tueShort'), t('wedShort'), t('thuShort'), t('friShort'), t('satShort')];
 
     for (let i = 1; i <= daysInMonth; i++) {
         const date = new Date(year, month, i);
@@ -1048,7 +1146,7 @@ function copyScheduleToClipboard() {
     const daysInMonth = new Date(year, month + 1, 0).getDate();
 
     let textContent = '';
-    const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+    const dayNames = [t('sunShort'), t('monShort'), t('tueShort'), t('wedShort'), t('thuShort'), t('friShort'), t('satShort')];
 
     for (let i = 1; i <= daysInMonth; i++) {
         const date = new Date(year, month, i);
@@ -1071,7 +1169,7 @@ function copyScheduleToClipboard() {
     }
 
     if (!textContent.trim()) {
-        alert('スケジュールが空です！コピーする内容はなにもないよ。');
+        alert(t('emptyScheduleError'));
         return;
     }
 
@@ -1085,13 +1183,13 @@ function copyScheduleToClipboard() {
 
     navigator.clipboard.writeText(textContent).then(() => {
         const originalText = copyBtn.innerHTML;
-        copyBtn.innerHTML = '✅ コピー完了！';
+        copyBtn.innerHTML = t('copySuccess');
         setTimeout(() => {
             copyBtn.innerHTML = originalText;
         }, 2000);
     }).catch(err => {
-        console.error('コピーできませんでした: ', err);
-        alert('コピーに失敗しました。手動でコピーしてください。');
+        console.error('Copy failed: ', err);
+        alert(t('copyError'));
     });
 }
 
@@ -1162,3 +1260,41 @@ function closeSidebar() {
     document.body.classList.remove('sidebar-open');
 }
 
+function updatePageLanguage() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLanguage][key]) {
+            el.textContent = translations[currentLanguage][key];
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (translations[currentLanguage][key]) {
+            el.title = translations[currentLanguage][key];
+        }
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[currentLanguage][key]) {
+            el.placeholder = translations[currentLanguage][key];
+        }
+    });
+
+    // Update active button state
+    langBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === currentLanguage);
+    });
+
+    // Handle currency unit specially if needed
+    const currencyUnitEls = document.querySelectorAll('.currency-unit');
+    currencyUnitEls.forEach(el => {
+        el.textContent = t('currencyUnit');
+    });
+
+    const hoursUnitEls = document.querySelectorAll('.hours-unit');
+    hoursUnitEls.forEach(el => {
+        el.textContent = t('hoursUnit');
+    });
+}
