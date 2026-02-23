@@ -672,7 +672,7 @@ body.delete-mode .calendar-label[draggable="true"] {
 }
 
 .time-inputs {
-    display: flux;
+    display: flex;
     gap: 15px;
 }
 
@@ -988,5 +988,6 @@ body.delete-mode .calendar-label[draggable="true"] {
 
 
 }
+
 
 
