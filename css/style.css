@@ -730,9 +730,16 @@ body.delete-mode .calendar-label[draggable="true"] {
         border-radius: 0;
     }
 
+    .form-group input[type="time"] {
+        padding: 5px 0;
+        width: 100%;
+        max-width: 80%;
+    }
+
     .time-input {
         width: 80%;
         margin: 5px;
+        margin-right: 5px;
     }
 }
 
