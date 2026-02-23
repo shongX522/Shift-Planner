@@ -56,6 +56,7 @@ const translations = {
         resetLabels: "Reset Labels",
         resetLabelsConfirm: "Are you sure you want to reset labels to default and clear all calendar data?",
         resetLabelsBtn: "🔄 Reset Labels",
+        resetLabesuccess:"All reset !!",
         hoursUnit: "h",
         currencyUnit: "",
         dateYearMonth: "{year} {month}",
@@ -118,6 +119,7 @@ const translations = {
         resetLabels: "ラベルをリセット",
         resetLabelsConfirm: "ラベルを初期状態に戻し、すべてのスケジュールを削除してもよろしいですか？",
         resetLabelsBtn: "🔄 ラベルをリセット",
+        resetLabesuccess:"ラベルリセットしました!!",
         hoursUnit: "時間",
         currencyUnit: "円",
         dateYearMonth: "{year}年 {month}",
@@ -180,10 +182,12 @@ const translations = {
         resetLabels: "라벨 초기화",
         resetLabelsConfirm: "라벨을 초기 상태로 되돌리고 모든 일정을 삭제하시겠습니까?",
         resetLabelsBtn: "🔄 라벨 초기화",
+        resetLabesuccess:"라벨 리셋했습니다!!",
         hoursUnit: "시간",
         currencyUnit: "원",
         dateYearMonth: "{year}년 {month}",
         monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
     }
 };
+
 
