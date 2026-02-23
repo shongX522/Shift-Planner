@@ -56,7 +56,7 @@ const translations = {
         resetLabels: "Reset Labels",
         resetLabelsConfirm: "Are you sure you want to reset labels to default and clear all calendar data?",
         resetLabelsBtn: "🔄 Reset Labels",
-        resetLabesuccess:"All reset !!",
+        resetLabesuccess:"Labels reset !!",
         hoursUnit: "h",
         currencyUnit: "",
         dateYearMonth: "{year} {month}",
@@ -189,5 +189,6 @@ const translations = {
         monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
     }
 };
+
 
 
