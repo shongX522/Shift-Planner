@@ -739,7 +739,7 @@ body.delete-mode .calendar-label[draggable="true"] {
 
     .time-inputs {
         display: grid;
-        padding: 2px auto;
+        padding: 2px 0;
         margin: 5px 0;
         grid-template-columns: 1fr;
         gap: 15px;
@@ -991,5 +991,6 @@ body.delete-mode .calendar-label[draggable="true"] {
     .calendar-week-total {
         font-size: 0.75rem;
     }
+
 
 }
