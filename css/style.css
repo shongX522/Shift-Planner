@@ -693,13 +693,21 @@ body.delete-mode .calendar-label[draggable="true"] {
         border-radius: 0;
     }
 
-    .time-inputs {
+    .form-group input[type="time"]{
         width: 100%;
-        max-width: 100%;
-        padding: 8px auto;
+        padding: 3px auto;
+        margin: 0 auto;
+        font-size: 1rem;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .time-inputs {
         display: grid;
         grid-template-columns: 1fr;
         gap: 15px;
+        max-width: 100%;
     }
 }
 
