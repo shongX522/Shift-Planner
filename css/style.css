@@ -664,8 +664,7 @@ body.delete-mode .calendar-label[draggable="true"] {
 }
 
 .form-group input[type="color"] {
-    width: 15%;
-    height: 40px;
+    border-radius: 50%;
     border: none;
     cursor: pointer;
 }
@@ -738,19 +737,10 @@ body.delete-mode .calendar-label[draggable="true"] {
         border-radius: 0;
     }
 
-    .form-group input[type="time"] {
-        width: 100%;
-        padding: 8px 12px;
-        margin: 5px 0;
-        font-size: 1.1rem;
-        text-align: center;
-        min-height: 44px;
-        /* Better for touch */
-        line-height: normal;
-    }
-
     .time-inputs {
         display: grid;
+        padding: 2px auto;
+        margin: 5px 0;
         grid-template-columns: 1fr;
         gap: 15px;
         max-width: 100%;
