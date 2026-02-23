@@ -644,7 +644,6 @@ body.delete-mode .calendar-label[draggable="true"] {
 
 .form-group input[type="text"],
 .form-group input[type="number"],
-.form-group input[type="time"],
 .form-group textarea {
     width: 100%;
     padding: 8px 12px;
@@ -652,15 +651,16 @@ body.delete-mode .calendar-label[draggable="true"] {
     border-radius: 6px;
     font-size: 1rem;
 }
-.form-group input[type="time"]{
-   width:100%;
-   padding: 4px 8px;
-   border: 1px solid #d1d5db;
-   border-radius: 6px;
-   fort-size: 0.9rem;
-   min-height: 36px;
-]
-   
+
+.form-group input[type="time"] {
+    width: 100%;
+    padding: 4px 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    min-height: 36px;
+}
+
 .form-group textarea {
     resize: vertical;
 }
@@ -744,8 +744,8 @@ body.delete-mode .calendar-label[draggable="true"] {
     }
 
     .form-group input[type="time"] {
-        padding: 8px;
-        width: 80%;
+        padding: 8px 12px;
+        width: 100%;
     }
 }
 
@@ -994,11 +994,4 @@ body.delete-mode .calendar-label[draggable="true"] {
         font-size: 0.75rem;
     }
 
-
 }
-
-
-
-
-
-
