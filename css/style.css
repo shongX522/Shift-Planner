@@ -146,6 +146,11 @@ body {
     align-items: center;
 }
 
+.header-actions-spaced {
+    margin-bottom: 15px;
+    justify-content: space-between;
+}
+
 .hourly-rate-container {
     margin-bottom: 15px;
 }
@@ -180,6 +185,11 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, outline 0.2s;
     user-select: none;
+    background-color: var(--label-bg, white);
+}
+
+.dragging-ghost {
+    opacity: 0.5 !important;
 }
 
 .time-label:hover {
@@ -257,6 +267,29 @@ body {
     background-color: #fee2e2;
     border-color: #ef4444;
     color: #ef4444;
+}
+
+.sidebar-divider-group {
+    margin-top: 20px;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 20px;
+}
+
+.btn-full-flex {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.btn-full-block {
+    width: 100%;
+    display: block;
+}
+
+.margin-right-auto {
+    margin-right: auto;
 }
 
 /* =========================================
@@ -457,6 +490,7 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    background-color: var(--label-bg, #3b82f6);
 }
 
 /* Weekly Totals */
@@ -571,6 +605,10 @@ body.delete-mode .calendar-label[draggable="true"] {
     display: none;
 }
 
+.hidden-element {
+    display: none !important;
+}
+
 .modal-content {
     background-color: white;
     padding: 25px;
@@ -674,6 +712,13 @@ body.delete-mode .calendar-label[draggable="true"] {
     color: white;
     font-size: 0.75rem;
     white-space: nowrap;
+    background-color: var(--label-bg, #3b82f6);
+    transform: translate(-50%, -50%);
+}
+
+.btn-success {
+    background-color: #10b981 !important;
+    color: white !important;
 }
 
 /* =========================================
@@ -693,14 +738,15 @@ body.delete-mode .calendar-label[draggable="true"] {
         border-radius: 0;
     }
 
-    .form-group input[type="time"]{
+    .form-group input[type="time"] {
         width: 100%;
-        padding: 3px auto;
-        margin: 0 auto;
-        font-size: 1rem;
+        padding: 8px 12px;
+        margin: 5px 0;
+        font-size: 1.1rem;
         text-align: center;
-        justify-content: center;
-        align-items: center;
+        min-height: 44px;
+        /* Better for touch */
+        line-height: normal;
     }
 
     .time-inputs {
