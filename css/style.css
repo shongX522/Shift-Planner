@@ -683,13 +683,11 @@ body.delete-mode .calendar-label[draggable="true"] {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
-    /* Allow wrapping on narrow screens (like iPad) */
 }
 
 .input-wrapper {
     flex: 1;
     min-width: 140px;
-    /* Ensure inputs don't get too squeezed */
 }
 
 .checkbox-group {
@@ -747,10 +745,9 @@ body.delete-mode .calendar-label[draggable="true"] {
     }
 
     .form-group input[type="time"] {
-        padding: 8px 12px;
-        width: 100%;
-        min-height: 44px;
-        /* Slightly larger targets for touch */
+        padding: 8px;
+        margin: 0 5px;
+        width: 80%;
     }
 }
 
