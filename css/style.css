@@ -739,11 +739,10 @@ body.delete-mode .calendar-label[draggable="true"] {
 
     .time-inputs {
         display: grid;
-        padding: 2px 0;
-        margin: 5px 0;
         grid-template-columns: 1fr;
         gap: 15px;
-        max-width: 100%;
+        width: 100%;
+        max-width: 80%;
     }
 }
 
@@ -994,3 +993,4 @@ body.delete-mode .calendar-label[draggable="true"] {
 
 
 }
+
