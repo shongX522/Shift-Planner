@@ -652,7 +652,15 @@ body.delete-mode .calendar-label[draggable="true"] {
     border-radius: 6px;
     font-size: 1rem;
 }
-
+.form-group input[type="time"]{
+   width:100%;
+   padding: 4px 8px;
+   border: 1px solid #d1d5db;
+   border-radius: 6px;
+   fort-size: 0.9rem;
+   min-height: 36px;
+]
+   
 .form-group textarea {
     resize: vertical;
 }
@@ -738,6 +746,8 @@ body.delete-mode .calendar-label[draggable="true"] {
     .form-group input[type="time"] {
         padding: 8px;
         width: 100%;
+        fort-size: 0.9rem;
+        max-width: 30%;
     }
 }
 
@@ -988,6 +998,7 @@ body.delete-mode .calendar-label[draggable="true"] {
 
 
 }
+
 
 
 
