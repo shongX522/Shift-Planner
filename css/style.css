@@ -671,6 +671,11 @@ body.delete-mode .calendar-label[draggable="true"] {
     cursor: pointer;
 }
 
+.time-inputs {
+    display: flex;
+    gap: 15px;
+}
+
 .input-wrapper {
     flex: 1;
     min-width: 0;
@@ -731,15 +736,8 @@ body.delete-mode .calendar-label[draggable="true"] {
     }
 
     .form-group input[type="time"] {
-        padding: 5px 0;
+        padding: 8px 12px;
         width: 100%;
-        max-width: 80%;
-    }
-
-    .time-input {
-        width: 80%;
-        margin: 5px;
-        margin-right: 5px;
     }
 }
 
