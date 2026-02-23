@@ -927,7 +927,7 @@ function handleResetLabels() {
         renderCalendar(currentDate);
         updateMonthlyTotal();
         selectLabel(null);
-        alert(t('saveSuccess'));
+        alert(t('resetLabesuccess'));
     }
 }
 
@@ -1298,3 +1298,4 @@ function updatePageLanguage() {
         el.textContent = t('hoursUnit');
     });
 }
+
