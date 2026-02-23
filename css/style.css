@@ -745,9 +745,7 @@ body.delete-mode .calendar-label[draggable="true"] {
 
     .form-group input[type="time"] {
         padding: 8px;
-        width: 100%;
-        fort-size: 0.9rem;
-        max-width: 30%;
+        width: 80%;
     }
 }
 
@@ -998,6 +996,7 @@ body.delete-mode .calendar-label[draggable="true"] {
 
 
 }
+
 
 
 
