@@ -875,6 +875,11 @@ function handleSaveLabel() {
     const startTime = startTimeInput.value;
     const endTime = endTimeInput.value;
 
+    if (!name) {
+        alert(t('labelNameError'));
+        return;
+    }
+
     if (name) {
         if (editingLabelId) {
             // Update existing
