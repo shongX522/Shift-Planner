@@ -653,6 +653,11 @@ body.delete-mode .calendar-label[draggable="true"] {
     font-size: 1rem;
 }
 
+.form-group input[type="time"]{
+   width: 100%;
+   gap: 10px;
+}
+
 .form-group textarea {
     resize: vertical;
 }
@@ -976,5 +981,6 @@ body.delete-mode .calendar-label[draggable="true"] {
     .calendar-week-total {
         font-size: 0.75rem;
     }
+
 
 }
