@@ -730,10 +730,10 @@ body.delete-mode .calendar-label[draggable="true"] {
         border-radius: 0;
     }
 
-   .time-inputs{
-      width: 80%;
-      margin: 0;
-   }
+    .time-input {
+        width: 80%;
+        margin: 5px;
+    }
 }
 
 /* Tablet / Mobile Layout */
@@ -981,9 +981,4 @@ body.delete-mode .calendar-label[draggable="true"] {
         font-size: 0.75rem;
     }
 
-
 }
-
-
-
-
