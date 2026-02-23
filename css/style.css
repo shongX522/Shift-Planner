@@ -653,10 +653,9 @@ body.delete-mode .calendar-label[draggable="true"] {
     font-size: 1rem;
 }
 
-.form-group input[type="time"]{
+.time-inputs{
    width: 100%;
    gap: 10px;
-   margin: 0 15px;
 }
 
 .form-group textarea {
@@ -985,4 +984,5 @@ body.delete-mode .calendar-label[draggable="true"] {
 
 
 }
+
 
