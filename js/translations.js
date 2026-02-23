@@ -44,8 +44,8 @@ const translations = {
         overLimit: "Over weekly limit of {limit} hours",
         deleteConfirm: "Are you sure you want to delete this label?",
         clearAllConfirm: "Are you sure you want to clear all scheduled labels?",
-        templateHeader: "Hi,\nHere is my schedule for {month}!",
-        templateFooter: "Best regards.",
+        templateHeader: "お疲れ様です。\n{month}月のシフトです！",
+        templateFooter: "お願いいたします。",
         overlapError: "Time overlap detected! This label cannot be added.",
         weeklyLimitError: "Weekly limit ({limit}h) exceeded!\nAdding this shift will bring the total to {total}h.",
         copySuccess: "✅ Copied!",
@@ -168,8 +168,8 @@ const translations = {
         overLimit: "주당 노동 시간 제한 {limit}시간을 초과했습니다",
         deleteConfirm: "이 라벨을 삭제하시겠습니까?",
         clearAllConfirm: "예약된 모든 라벨을 삭제하시겠습니까?",
-        templateHeader: "수고하십니다.\n{month}월의 시프트 일정입니다!",
-        templateFooter: "잘 부탁드립니다.",
+        templateHeader: "お疲れ様です。\n{month}月のシフトです！",
+        templateFooter: "お願いいたします。",
         overlapError: "시간이 중복되었습니다! 이 라벨을 추가할 수 없습니다.",
         weeklyLimitError: "주당 노동 시간 제한 ({limit}시간)을 초과했습니다!\n이 시프트를 추가하면 주간 합계가 {total}시간이 됩니다.",
         copySuccess: "✅ 복사 완료!",
@@ -186,3 +186,4 @@ const translations = {
         monthNames: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
     }
 };
+
