@@ -672,8 +672,7 @@ body.delete-mode .calendar-label[draggable="true"] {
 }
 
 .time-inputs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flux;
     gap: 15px;
 }
 
@@ -737,7 +736,7 @@ body.delete-mode .calendar-label[draggable="true"] {
     }
 
     .form-group input[type="time"] {
-        padding: 8px 12px;
+        padding: 8px 10px;
         width: 100%;
     }
 }
@@ -989,4 +988,5 @@ body.delete-mode .calendar-label[draggable="true"] {
 
 
 }
+
 
